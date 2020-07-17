@@ -1,0 +1,42 @@
+﻿<Window x:Class="GameCheats.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameCheats"
+        xmlns:uc="clr-namespace:GameCheats.UserControls"
+        mc:Ignorable="d"
+        Title="Game Cheats" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel>
+            <ItemsControl>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="FrameworkElement.Margin" Value="5"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Items>
+                    <StackPanel DockPanel.Dock="Left">
+                        <uc:GameControl x:Name="GameControl" />
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Right">
+                        <uc:ConfigurationControl x:Name="ConfigurationControl" Game="{Binding ElementName=GameControl, Path=SelectedGame, Mode=OneWay}" />
+                    </StackPanel>
+                </ItemsControl.Items>
+            </ItemsControl>
+            <StackPanel Margin="5">
+                <uc:PluginConfigurationControl x:Name="PluginControl" Configuration="{Binding ElementName=ConfigurationControl, Path=SelectedConfiguration, Mode=OneWay}" />
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>
